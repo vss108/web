@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pregnancy Care Labs • MommyGlow</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<style>
+  :root {
+    --pink: #e91e63;
+    --pink-dark: #c2185b;
+    --pink-light: #fce4ec;
+    --glow: #ff6b9d;
+    --white: #ffffff;
+    --text: #444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #fff0f8 0%, #fce4ec 45%, #f8bbd0 100%);
+    background-size: 400% 400%;
+    animation: gradient 20s ease infinite;
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Subtle Wave Background */
+  .wave-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .wave {
+    position: absolute;
+    bottom: 0;
+    width: 200%;
+    height: 40vh;
+    background: linear-gradient(transparent, rgba(233,30,99,0.08));
+    animation: wave 22s linear infinite;
+  }
+  .wave:nth-child(2) { animation-delay: -11s; opacity: 0.5; }
+  @keyframes wave { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  /* Glass Header */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(25px);
+    border-bottom: 1px solid rgba(233,30,99,0.15);
+    padding: 18px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9999;
+    box-shadow: 0 10px 40px rgba(233,30,99,0.2);
+  }
+  .logo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 42px;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--pink), #ff8ab3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .top-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .top-right a {
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    transition: all 0.4s ease;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  }
+  .btn-pink { background: var(--pink); }
+  .btn-red { background: #d32f2f; }
+  .top-right a:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+  }
+
+  main {
+    max-width: 1300px;
+    margin: 140px auto 80px;
+    padding: 0 20px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 3.8rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--pink-dark), var(--pink), #ff8ab3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 60px;
+    animation: glow 3s ease-in-out infinite alternate;
+  }
+  @keyframes glow {
+    from { text-shadow: 0 0 30px #ff6b9d; }
+    to { text-shadow: 0 0 60px #ff1493; }
+  }
+
+  /* Premium Floating Cards */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 32px;
+  }
+  .card {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 28px;
+    padding: 32px 28px;
+    box-shadow: 0 20px 50px rgba(233,30,99,0.22);
+    border: 1px solid rgba(233,30,99,0.15);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(233,30,99,0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: 0.8s;
+  }
+  .card:hover::before { opacity: 1; }
+  .card:hover {
+    transform: translateY(-20px) scale(1.04);
+    box-shadow: 0 40px 90px rgba(233,30,99,0.4);
+  }
+
+  .card h3 {
+    font-size: 1.8rem;
+    color: var(--pink-dark);
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  .meta {
+    font-size: 1rem;
+    color: #666;
+    margin: 8px 0;
+    line-height: 1.6;
+  }
+  .meta strong { color: var(--pink-dark); }
+
+  /* Sparkling Star Rating */
+  .rating {
+    margin: 16px 0;
+    font-size: 28px;
+  }
+  .star {
+    color: #ddd;
+    animation: sparkle 2s infinite;
+  }
+  .star.filled {
+    color: #ffc400;
+    animation: sparkle 1.5s infinite;
+  }
+  @keyframes sparkle {
+    0%, 100% { transform: scale(1) rotate(0); }
+    50% { transform: scale(1.15) rotate(5deg); }
+  }
+
+  .reviews {
+    background: #fff8fb;
+    padding: 14px;
+    border-radius: 16px;
+    font-size: 0.95rem;
+    color: #555;
+    max-height: 90px;
+    overflow-y: auto;
+    margin: 16px 0;
+    border-left: 4px solid var(--pink);
+  }
+
+  /* Glowing Buttons */
+  .actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  .actions a {
+    flex: 1;
+    min-width: 100px;
+    padding: 14px 20px;
+    border-radius: 50px;
+    text-align: center;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  }
+  .book { background: linear-gradient(45deg, #28a745, #2ecc71); }
+  .call { background: linear-gradient(45deg, #007bff, #00c3ff); }
+  .chart { background: linear-gradient(45deg, #ff9800, #ffb74d); }
+
+  .actions a:hover {
+    transform: translateY(-6px) scale(1.08);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+  }
+  .actions a::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 0; height: 0;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  .actions a:active::after {
+    width: 300px;
+    height: 300px;
+  }
+
+  @media (max-width: 768px) {
+    header { padding: 16px 20px; flex-direction: column; gap: 12px; }
+    h1 { font-size: 2.8rem; }
+    .grid { grid-template-columns: 1fr; padding: 0 10px; }
+    .card { padding: 24px 20px; }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="wave-bg">
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+
+<header>
+  <div class="logo">MommyGlow</div>
+  <div class="top-right">
+    <% if (name) { %>
+      <span style="color:var(--pink-dark); font-weight:600;">Hello, <%= name %>!</span>
+      <a href="/stage1" class="btn-pink">My Journey</a>
+      <a href="/precautions" class="btn-pink">Precautions</a>
+      <a href="/logout" class="btn-red">Logout</a>
+    <% } else { %>
+      <a href="/login" class="btn-pink">Login</a>
+      <a href="/signup" class="btn-pink">Join Free</a>
+    <% } %>
+  </div>
+</header>
+
+<main>
+  <h1>Trusted Diagnostic Labs Near You</h1>
+
+  <div class="grid">
+    <% if(labs && labs.length){ %>
+      <% labs.forEach(lab => { %>
+        <div class="card">
+          <h3><%= lab.name %></h3>
+          <div class="meta"><strong>Address:</strong> <%= lab.address %></div>
+          <div class="meta"><strong>Location:</strong> <%= lab.location %></div>
+          <div class="meta"><strong>Contact:</strong> <%= lab.phone %></div>
+
+          <div class="rating">
+            <% for(let i=1; i<=5; i++) { %>
+              <span class="star <%= i <= lab.rating ? 'filled' : '' %>">★</span>
+            <% } %>
+          </div>
+
+          <% if(lab.reviews && lab.reviews.length) { %>
+            <div class="reviews">
+              <% lab.reviews.slice(0,3).forEach(r => { %>
+                • <%= r %><br>
+              <% }) %>
+            </div>
+          <% } %>
+
+          <div class="actions">
+            <a href="/book-slot/<%= lab._id %>" class="book">Book Slot</a>
+            <a href="tel:<%= lab.phone %>" class="call">Call Now</a>
+            <a href="/chart/<%= lab._id %>" class="chart">View Chart</a>
+          </div>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p style="text-align:center; font-size:1.4rem; color:#aaa; grid-column:1/-1;">
+        No diagnostic labs found nearby
+      </p>
+    <% } %>
+  </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eighth Month - MommyGlow</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+  <style>
+    :root {
+      --pink: #e91e63;
+      --pink-dark: #c2185b;
+      --pink-glow: #ff4081;
+      --light-pink: #fce4ec;
+      --gold: #ffd700;
+      --success: #4caf50;
+      --danger: #f44336;
+      --warning: #ff9800;
+      --info: #2196f3;
+      --purple: #9c27b0;
+      --teal: #00bcd4;
+      --green: #8bc34a;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fff0f5 0%, #fce4ec 40%, #f8bbd0 100%);
+      min-height: 100vh;
+      color: #444;
+      overflow-x: hidden;
+    }
+
+    /* Dreamy Wave Background */
+    .wave-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .wave {
+      position: absolute;
+      bottom: 0;
+      width: 200%;
+      height: 55vh;
+      background: linear-gradient(transparent, rgba(233,30,99,0.12));
+      animation: wave 24s linear infinite;
+      opacity: 0.7;
+    }
+    .wave:nth-child(2) { animation-delay: -12s; opacity: 0.4; }
+    @keyframes wave { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* Glass Header */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(25px);
+      border-bottom: 1px solid rgba(233,30,99,0.2);
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 9999;
+      box-shadow: 0 15px 50px rgba(233,30,99,0.3);
+    }
+    .logo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 48px;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--pink), #ff6baf);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .back-btn {
+      padding: 14px 36px;
+      background: var(--pink);
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 12px 35px rgba(233,30,99,0.4);
+      transition: all 0.4s ease;
+    }
+    .back-btn:hover {
+      transform: translateY(-6px) scale(1.08);
+      box-shadow: 0 25px 50px rgba(233,30,99,0.55);
+    }
+
+    main {
+      max-width: 1150px;
+      margin: 150px auto 100px;
+      padding: 0 20px;
+    }
+
+    /* Heartbeat + Glowing Title */
+    h1 {
+      text-align: center;
+      font-size: 3.8rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #c2185b, #e91e63, #ff4081, #ff6baf);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+      animation: heartbeat 2.8s ease-in-out infinite, glow 4s ease-in-out infinite;
+      text-shadow: 0 0 30px rgba(255,64,129,0.4);
+    }
+    @keyframes heartbeat { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    @keyframes glow { 0%,100% { text-shadow: 0 0 20px rgba(255,64,129,0.4); } 50% { text-shadow: 0 0 40px rgba(255,64,129,0.7); } }
+
+    .subtitle {
+      text-align: center;
+      font-size: 1.4rem;
+      color: #775555;
+      max-width: 960px;
+      margin: 0 auto 70px;
+      font-weight: 500;
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    /* Floating Glass Cards */
+    .section, .emergency-box {
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(22px);
+      border-radius: 32px;
+      padding: 42px 38px;
+      margin: 50px 0;
+      box-shadow: 0 25px 70px rgba(233,30,99,0.25);
+      border: 1px solid rgba(233,30,99,0.18);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .section:hover, .emergency-box:hover {
+      transform: translateY(-22px) scale(1.03);
+      box-shadow: 0 60px 120px rgba(233,30,99,0.42);
+    }
+    .section::before {
+      content: '';
+      position: absolute;
+      top: -70%; left: -70%;
+      width: 240%; height: 240%;
+      background: radial-gradient(circle, rgba(255,105,180,0.18) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 1s;
+    }
+    .section:hover::before { opacity: 1; }
+
+    h2.section-title {
+      font-size: 2.4rem;
+      color: var(--pink-dark);
+      margin-bottom: 32px;
+      font-weight: 700;
+      text-align: center;
+      position: relative;
+    }
+    h2.section-title::after {
+      content: '';
+      width: 140px;
+      height: 7px;
+      background: linear-gradient(90deg, transparent, var(--pink-glow), transparent);
+      display: block;
+      margin: 18px auto 0;
+      border-radius: 50px;
+      box-shadow: 0 0 15px rgba(255,64,129,0.6);
+    }
+
+    .flex-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 38px;
+      margin-top: 24px;
+    }
+    @media (max-width: 768px) {
+      .flex-grid { grid-template-columns: 1fr; gap:24px; }
+      h1 { font-size: 2.8rem; }
+      main { margin: 130px auto 70px; padding: 0 15px; }
+      .section, .emergency-box { padding: 32px 26px; }
+    }
+
+    .do-box, .avoid-box {
+      background: rgba(255,255,255,0.95);
+      padding: 32px;
+      border-radius: 26px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.5s ease;
+    }
+    .do-box { border-left: 8px solid var(--success); background: #f8fff8; }
+    .avoid-box { border-left: 8px solid var(--danger); background: #fff8f8; }
+    .do-box:hover, .avoid-box:hover { transform: translateY(-10px); }
+
+    li {
+      padding: 16px 0;
+      font-size: 1.15rem;
+      position: relative;
+      padding-left: 56px;
+      transition: all 0.4s ease;
+    }
+    li:hover { transform: translateX(12px); }
+
+    .do-item::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 12px;
+      font-size: 2.2rem;
+      color: var(--success);
+      animation: sparkle 2s infinite;
+    }
+    .avoid-item::before {
+      content: "✕";
+      position: absolute;
+      left: 0;
+      top: 12px;
+      font-size: 2.2rem;
+      color: var(--danger);
+    }
+    @keyframes sparkle {
+      0%,100% { transform: scale(1) rotate(0); text-shadow: 0 0 10px rgba(76,175,80,0.6); }
+      50% { transform: scale(1.3) rotate(10deg); text-shadow: 0 0 25px rgba(76,175,80,0.9); }
+    }
+
+    .tip-box {
+      background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 50%, #ffe082 100%);
+      border: 2px solid var(--gold);
+      padding: 24px 32px;
+      border-radius: 24px;
+      margin: 32px 0;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #e65100;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(255,215,0,0.3);
+      animation: shimmer 6s infinite;
+    }
+    .tip-box::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%);
+      transform: rotate(30deg);
+      animation: shine 8s infinite;
+    }
+    @keyframes shimmer { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    @keyframes shine { 0% { transform: translateX(-100%) rotate(30deg); } 100% { transform: translateX(100%) rotate(30deg); } }
+
+  </style>
+</head>
+<body>
+
+<div class="wave-bg">
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+
+<header>
+  <div class="logo">MommyGlow</div>
+  <div>
+    <a href="/precautions" class="back-btn">Back to Journey</a>
+  </div>
+</header>
+
+<main>
+  <h1>🌼 Eighth Month of Pregnancy (Week 29–32)</h1>
+  <p class="subtitle"><strong>This is the final trimester phase where the baby gains fat, brain develops rapidly, and the mother may experience increased discomfort.</strong></p>
+
+  <!-- Baby Growth -->
+  <div class="section">
+    <h2 class="section-title">👶 Baby Growth</h2>
+    <ul>
+      <li class="do-item">Baby size: ~ 40–45 cm, 1.8–2.3 kg</li>
+      <li class="do-item">Brain development very fast — baby can hear, respond to light & sound</li>
+      <li class="do-item">Lungs continue maturing (getting ready for breathing)</li>
+      <li class="do-item">Baby starts moving to head-down position</li>
+      <li class="do-item">Strong kicks — less space to move</li>
+    </ul>
+  </div>
+
+  <!-- Mother's Body Changes -->
+  <div class="section">
+    <h2 class="section-title">🤰 Mother's Body Changes</h2>
+    <ul>
+      <li class="do-item">Shortness of breath due to uterus pushing diaphragm</li>
+      <li class="do-item">More frequent urination</li>
+      <li class="do-item">Back pain & pelvic pressure</li>
+      <li class="do-item">Swelling in legs/feet (normal unless sudden)</li>
+      <li class="do-item">White discharge increases (normal unless smelly/itchy)</li>
+      <li class="do-item">Difficulty sleeping</li>
+      <li class="do-item">False contractions (Braxton Hicks)</li>
+    </ul>
+  </div>
+
+  <!-- Diet -->
+  <div class="section">
+    <h2 class="section-title">🍽️ Foods to Eat</h2>
+    <ul>
+      <li class="do-item">Iron-rich foods: Spinach, beetroot, broccoli, jaggery, dates</li>
+      <li class="do-item">Protein: Eggs, milk, curd, paneer, fish/chicken (well cooked), dal</li>
+      <li class="do-item">Calcium: Ragi, almonds, sesame seeds, milk products</li>
+      <li class="do-item">Hydration: 8–10 glasses of water</li>
+      <li class="do-item">Fiber: Whole grains, fruits, vegetables to prevent constipation</li>
+    </ul>
+  </div>
+
+  <!-- Foods to Avoid -->
+  <div class="section">
+    <h2 class="section-title">🚫 Foods to Avoid</h2>
+    <ul>
+      <li class="avoid-item">Street food / unhygienic foods</li>
+      <li class="avoid-item">Too much salt → swelling ↑</li>
+      <li class="avoid-item">Papaya and pineapple (in large quantity)</li>
+      <li class="avoid-item">Excessive sugary foods</li>
+      <li class="avoid-item">Unpasteurized milk & cheese</li>
+      <li class="avoid-item">Undercooked meat/eggs</li>
+    </ul>
+  </div>
+
+  <!-- Exercises -->
+  <div class="section">
+    <h2 class="section-title">🧘‍♀️ Exercises & Activity</h2>
+    <ul>
+      <li class="do-item">Walking 30 mins/day</li>
+      <li class="do-item">Pelvic floor (Kegel) exercises</li>
+      <li class="do-item">Light prenatal yoga (doctor recommended)</li>
+      <li class="do-item">Sleep on left side — improves blood flow</li>
+      <li class="avoid-item">Avoid heavy lifting or standing long hours</li>
+    </ul>
+  </div>
+
+  <!-- Warning Symptoms -->
+  <div class="emergency-box">
+    <h2 class="section-title">⚠️ Warning Symptoms</h2>
+    <ul>
+      <li class="avoid-item">Severe abdominal pain or regular contractions</li>
+      <li class="avoid-item">Reduced baby movements</li>
+      <li class="avoid-item">Heavy bleeding or watery discharge (water break)</li>
+      <li class="avoid-item">Severe headache, sudden swelling → Pre-eclampsia</li>
+      <li class="avoid-item">High fever</li>
+      <li class="avoid-item">Vision blurring, dizziness</li>
+    </ul>
+  </div>
+
+  <!-- Doctor's Tips -->
+  <div class="tip-box">
+    Drink enough water, stay active daily, maintain calm, and follow doctor's guidance for normal delivery.
+  </div>
+
+</main>
+
+</body>
+</html>

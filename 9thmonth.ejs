@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ninth Month • MommyGlow</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+  <style>
+    :root {
+      --pink: #e91e63;
+      --pink-dark: #c2185b;
+      --red-glow: #ff1744;
+      --success: #4caf50;
+      --danger: #f44336;
+      --warning: #ff9800;
+      --info: #2196f3;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fff0f3 0%, #fce4ec 30%, #f8bbd0 70%, #ff8ab3 100%);
+      color: #444;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.93);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(233,30,99,0.2);
+      padding: 18px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 9999;
+      box-shadow: 0 12px 40px rgba(233,30,99,0.3);
+    }
+    .logo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 44px;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--pink-dark), var(--red-glow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .back-btn {
+      padding: 12px 36px;
+      background: var(--red-glow);
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 10px 35px rgba(255,23,68,0.4);
+      transition: all 0.4s ease;
+    }
+    .back-btn:hover {
+      transform: translateY(-6px) scale(1.07);
+      box-shadow: 0 20px 50px rgba(255,23,68,0.6);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 150px auto 100px;
+      padding: 0 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3.8rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #d50000, var(--pink), #ff4081, #ff8ab3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+      animation: heartbeat 2.5s ease-in-out infinite;
+      text-shadow: 0 4px 15px rgba(255,23,68,0.3);
+    }
+    @keyframes heartbeat {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--pink-dark);
+      font-style: italic;
+      margin-bottom: 60px;
+    }
+
+    .section {
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(22px);
+      border-radius: 28px;
+      padding: 38px 36px;
+      margin: 50px 0;
+      box-shadow: 0 20px 70px rgba(233,30,99,0.25);
+      border: 1px solid rgba(255,23,68,0.15);
+      transition: all 0.6s;
+    }
+    .section:hover {
+      transform: translateY(-20px) scale(1.03);
+      box-shadow: 0 50px 120px rgba(255,23,68,0.4);
+    }
+
+    h2 {
+      font-size: 2.4rem;
+      text-align: center;
+      margin-bottom: 30px;
+      color: var(--pink-dark);
+      font-weight: 700;
+    }
+
+    ul { list-style:none; }
+    li {
+      padding: 14px 0 14px 50px;
+      font-size: 1.15rem;
+      position: relative;
+    }
+    li::before {
+      position: absolute;
+      left: 0;
+      top: 12px;
+      font-size: 1.9rem;
+      font-weight: bold;
+    }
+
+    /* Section colors */
+    .baby-growth { border-left: 8px solid var(--success); }
+    .mother-body { border-left: 8px solid #8bc34a; }
+    .foods-eat { border-left: 8px solid var(--warning); }
+    .foods-avoid, .warning { border-left: 8px solid var(--danger); }
+    .exercise { border-left: 8px solid var(--info); }
+    .tests { border-left: 8px solid #00bcd4; }
+    .hospital-bag { border-left: 8px solid #9c27b0; }
+    .final-goal { border-left: 8px solid #1565c0; }
+
+    /* Grid for hospital bag */
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:30px; margin-top:20px; }
+    @media (max-width:768px) { .grid-2 { grid-template-columns:1fr; } h1{ font-size:2.9rem;} main{margin:130px auto 80px; padding:0 15px;} }
+
+    .love-note { text-align:center; font-size:1.4rem; font-style:italic; color:var(--pink-dark); margin:60px 0 20px; font-weight:600; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">MommyGlow</div>
+    <div>
+      <% if(name){ %>
+        <a href="/precautions" class="back-btn">Back to Journey</a>
+      <% } else { %>
+        <a href="/" class="back-btn">Back to Home</a>
+      <% } %>
+    </div>
+  </header>
+
+  <main>
+    <h1>Ninth Month • Almost There!</h1>
+    <p class="subtitle">Your baby is fully developed and ready to meet you. Stay calm and prepared!</p>
+
+    <div class="section baby-growth">
+      <h2>Baby Growth</h2>
+      <ul>
+        <li>Baby weight: ~2.7 – 3.8 kg</li>
+        <li>Lungs fully mature</li>
+        <li>Head-down position (usually)</li>
+        <li>Rapid fat gain for warmth</li>
+        <li>Strong kicks & stretches</li>
+        <li>Brain & immune system development</li>
+      </ul>
+    </div>
+
+    <div class="section mother-body">
+      <h2>Maternal Body Changes</h2>
+      <ul>
+        <li>Pelvic pressure & "lightning crotch"</li>
+        <li>False contractions (Braxton Hicks)</li>
+        <li>Mucus plug may come out</li>
+        <li>Swelling, backache, insomnia</li>
+        <li>Baby drops → easier breathing</li>
+      </ul>
+    </div>
+
+    <div class="section foods-eat">
+      <h2>Foods to Eat</h2>
+      <ul>
+        <li>Protein, iron, calcium-rich meals</li>
+        <li>Dates (6/day from week 36+ for labor)</li>
+        <li>Small frequent meals</li>
+        <li>Stay hydrated</li>
+      </ul>
+    </div>
+
+    <div class="section foods-avoid">
+      <h2>Foods to Avoid</h2>
+      <ul>
+        <li>Oily/spicy foods → acidity</li>
+        <li>Excess salt → swelling</li>
+        <li>Outside food → infection risk</li>
+      </ul>
+    </div>
+
+    <div class="section exercise">
+      <h2>Exercises & Activity</h2>
+      <ul>
+        <li>Daily gentle walking</li>
+        <li>Kegel & perineal massage</li>
+        <li>Breathing exercises</li>
+        <li>Sleep on left side</li>
+      </ul>
+    </div>
+
+    <div class="section tests">
+      <h2>Check-ups</h2>
+      <ul>
+        <li>Weekly prenatal visits</li>
+        <li>NST if needed</li>
+        <li>GBS screening</li>
+        <li>Monitor BP & baby position</li>
+      </ul>
+    </div>
+
+    <div class="section warning">
+      <h2>Emergency Signs</h2>
+      <ul>
+        <li>Water breaks / leaking</li>
+        <li>Regular strong contractions</li>
+        <li>Bleeding</li>
+        <li>Sudden swelling + headache</li>
+        <li>No/reduced baby movement</li>
+      </ul>
+    </div>
+
+    <div class="section hospital-bag">
+      <h2>Hospital Bag Checklist</h2>
+      <div class="grid-2">
+        <div>
+          <h4 style="color:var(--success)">For Mom</h4>
+          <ul>
+            <li>ID & reports</li>
+            <li>Night gowns, pads, slippers</li>
+            <li>Toiletries & nursing bra</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="color:var(--success)">For Baby</h4>
+          <ul>
+            <li>Newborn clothes, diapers, blanket</li>
+            <li>Cap, mittens, socks</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section final-goal">
+      <h2>Final Goals</h2>
+      <ul>
+        <li>Count kicks daily</li>
+        <li>Stay calm & positive</li>
+        <li>Know when to rush to hospital</li>
+        <li>Trust your body — you’ve got this!</li>
+      </ul>
+    </div>
+
+    <p class="love-note">
+      You're so close! The world is waiting to meet your little love. You've been incredible these 9 months!
+    </p>
+
+  </main>
+</body>
+</html>

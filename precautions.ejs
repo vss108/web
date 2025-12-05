@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MommyGlow • Your Pregnancy Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+  :root {
+    --pink: #e91e63;
+    --pink-dark: #c2185b;
+    --pink-glow: #ff6b9d;
+    --dark: #1e1e2e;
+    --white: #ffffff;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #fff0f8 0%, #fce4ec 45%, #f8bbd0 100%);
+    color: #444;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+  .wave-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .wave {
+    position: absolute;
+    bottom: 0;
+    width: 200%;
+    height: 40vh;
+    background: linear-gradient(transparent, rgba(233,30,99,0.08));
+    animation: wave 20s linear infinite;
+  }
+  .wave:nth-child(2) { animation-delay: -10s; opacity: 0.6; }
+  @keyframes wave { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(25px);
+    border-bottom: 1px solid rgba(233,30,99,0.15);
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9999;
+    box-shadow: 0 15px 50px rgba(233,30,99,0.25);
+  }
+  .logo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 46px;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--pink), #ff8ab3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(233,30,99,0.4);
+  }
+  .user-zone {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+  .welcome {
+    text-align: right;
+    color: var(--pink-dark);
+    font-weight: 600;
+  }
+  .actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.5s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+  .btn-pink { background: var(--pink); color: white; }
+  .btn-dark { background: var(--dark); color: white; }
+  .btn-red { background: #c62828; color: white; }
+  .btn:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  }
+  .bell {
+    position: relative;
+    font-size: 30px;
+    color: var(--pink);
+    cursor: pointer;
+    animation: ring 4s infinite;
+  }
+  @keyframes ring {
+    0%,100% { transform: rotate(0); }
+    10%,30%,50%,70%,90% { transform: rotate(-10deg); }
+    20%,40%,60%,80% { transform: rotate(10deg); }
+  }
+  .bell-badge {
+    position: absolute;
+    top: -10px; right: -10px;
+    background: #ff1744;
+    color: white;
+    font-size: 13px;
+    font-weight: 800;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 5px 15px rgba(255,23,68,0.6);
+  }
+  .hero {
+    padding: 160px 40px 100px;
+    text-align: center;
+    position: relative;
+  }
+  .hero h1 {
+    font-size: 4.8rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--pink-dark), var(--pink), #ff8ab3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+    animation: glow 3s ease-in-out infinite alternate;
+  }
+  @keyframes glow { from { text-shadow: 0 0 30px #ff6b9d; } to { text-shadow: 0 0 60px #ff1493; } }
+  .hero p {
+    font-size: 1.5rem;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto 30px;
+    font-weight: 500;
+  }
+  .section-title {
+    text-align: center;
+    font-size: 3rem;
+    color: var(--pink-dark);
+    margin: 100px 0 60px;
+    position: relative;
+  }
+  .section-title::after {
+    content: '';
+    width: 150px;
+    height: 7px;
+    background: linear-gradient(90deg, transparent, var(--pink), transparent);
+    display: block;
+    margin: 25px auto;
+    border-radius: 50px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 35px;
+    padding: 0 20px;
+    margin-bottom: 100px;
+  }
+  .card {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 32px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(233,30,99,0.25);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(233,30,99,0.15);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(233,30,99,0.15) 0%, transparent 70%);
+    transform: translateX(-50%) translateY(-50%);
+    transition: 0.8s;
+    opacity: 0;
+  }
+  .card:hover::before { opacity: 1; }
+  .card:hover {
+    transform: translateY(-25px) scale(1.05);
+    box-shadow: 0 40px 90px rgba(233,30,99,0.45);
+  }
+  .card-icon {
+    font-size: 4.5rem;
+    margin-bottom: 25px;
+    display: block;
+    filter: drop-shadow(0 10px 20px rgba(233,30,99,0.4));
+  }
+  .card h3 {
+    font-size: 1.9rem;
+    color: var(--pink-dark);
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+  .card p {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.8;
+  }
+  .notif-drop {
+    position: absolute;
+    top: 70px; right: 0;
+    width: 400px;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+    padding: 25px;
+    max-height: 520px;
+    overflow-y: auto;
+    display: none;
+    z-index: 10000;
+  }
+  .notif-drop.show { display: block; animation: pop 0.4s ease; }
+  @keyframes pop { from { transform: scale(0.9); opacity:0; } to { transform: none; opacity:1; } }
+
+  @media (max-width: 768px) {
+    header { padding: 18px 20px; flex-direction: column; gap: 15px; }
+    .hero h1 { font-size: 3.2rem; }
+    .section-title { font-size: 2.4rem; }
+    .grid { grid-template-columns: 1fr; padding: 0 15px; }
+    .notif-drop { width: 320px; right: -20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wave-bg">
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+
+<header>
+  <div class="logo">MommyGlow</div>
+  <div class="user-zone">
+    <% if(name){ %>
+      <div class="welcome">
+        Hello, <strong><%= name %>!</strong>
+      </div>
+      <div class="actions">
+        <a href="/stage1" class="btn btn-pink">My Precautions</a>
+        <a href="/doctor" class="btn btn-pink">Book Doctor</a>
+        <a href="/logout" class="btn btn-red">Logout</a>
+      </div>
+      <div style="position:relative;">
+        <div class="bell" id="notificationBell">
+          <i class="fas fa-bell"></i>
+          <span class="bell-badge" id="notificationBadge">0</span>
+        </div>
+        <a href="/shopping" style="font-size:32px; color:var(--pink); margin-left:20px;">
+          <i class="fas fa-shopping-cart"></i>
+        </a>
+        <div class="notif-drop" id="notificationDropdown"></div>
+      </div>
+    <% } else { %>
+      <div class="actions">
+        <a href="/login" class="btn btn-dark">Login</a>
+        <a href="/signup" class="btn btn-pink">Join Free</a>
+      </div>
+    <% } %>
+  </div>
+</header>
+
+<main class="hero">
+  <h1>Your Beautiful Journey</h1>
+  <p>We’re with you every heartbeat, every kick, every magical moment</p>
+
+  <div class="section-title">Month-wise Care Guide</div>
+  <div class="grid">
+    <a href="/1stmonth" class="card">
+      <span class="card-icon"><i class="fas fa-baby"></i></span>
+      <h3>Month 1</h3><p>Most precious time — start folic acid & love</p>
+    </a>
+    <a href="/2ndmonth" class="card">
+      <span class="card-icon"><i class="fas fa-dizzy"></i></span>
+      <h3>Month 2</h3><p>Morning sickness? We’ve got tips!</p>
+    </a>
+    <a href="/3rdmonth" class="card">
+      <span class="card-icon"><i class="fas fa-heartbeat"></i></span>
+      <h3>Month 3</h3><p>First ultrasound — hear the heartbeat</p>
+    </a>
+    <a href="/4thmonth" class="card">
+      <span class="card-icon"><i class="fas fa-butterfly"></i></span>
+      <h3>Month 4</h3><p>Feel those magical flutters!</p>
+    </a>
+    <a href="/5thmonth" class="card">
+      <span class="card-icon"><i class="fas fa-ear"></i></span>
+      <h3>Month 5</h3><p>Baby hears your voice now</p>
+    </a>
+    <a href="/6thmonth" class="card">
+      <span class="card-icon"><i class="fas fa-vial"></i></span>
+      <h3>Month 6</h3><p>Time for glucose test & vaccines</p>
+    </a>
+    <a href="/7thmonth" class="card">
+      <span class="card-icon"><i class="fas fa-baby-carriage"></i></span>
+      <h3>Month 7</h3><p>Birth plan & prenatal classes</p>
+    </a>
+    <a href="/8thmonth" class="card">
+      <span class="card-icon"><i class="fas fa-suitcase"></i></span>
+      <h3>Month 8</h3><p>Hospital bag ready!</p>
+    </a>
+    <a href="/9thmonth" class="card">
+      <span class="card-icon"><i class="fas fa-heart"></i></span>
+      <h3>Month 9</h3><p>Any day now… we’re ready!</p>
+    </a>
+  </div>
+
+  <div class="section-title">Health & Wellness</div>
+  <div class="grid">
+    <div class="card">
+      <span class="card-icon"><i class="fas fa-spa"></i></span>
+      <h3>Physical Changes</h3><p>Glow, weight gain, swelling guide</p>
+    </div>
+    <div class="card">
+      <span class="card-icon"><i class="fas fa-stethoscope"></i></span>
+      <h3>Medical Care</h3><p>Tests, scans, doctor visits</p>
+    </div>
+    <div class="card">
+      <span class="card-icon"><i class="fas fa-pray"></i></span>
+      <h3>Self Care</h3><p>Rest, yoga, mental peace</p>
+    </div>
+    <div class="card">
+      <span class="card-icon"><i class="fas fa-apple-alt"></i></span>
+      <h3>Anemia Care</h3><p>Iron-rich foods & tips</p>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function(e) {
+    const dropdown = document.getElementById('notificationDropdown');
+    const bell = document.getElementById('notificationBell');
+    if (!bell.contains(e.target)) {
+      dropdown.classList.remove('show');
+    }
+  });
+
+  document.getElementById('notificationBell')?.addEventListener('click', function(e){
+    e.stopPropagation();
+    document.getElementById('notificationDropdown').classList.toggle('show');
+    loadBookings();
+  });
+
+  function loadBookings() {
+    const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+    document.getElementById('notificationBadge').textContent = bookings.length;
+    
+    const container = document.getElementById('notificationDropdown');
+    if (bookings.length === 0) {
+      container.innerHTML = '<p style="text-align:center;color:#aaa;padding:30px;">No bookings yet</p>';
+      return;
+    }
+    
+    container.innerHTML = bookings.map(b => `
+      <div style="background:#fff5f9;padding:16px;margin:10px 0;border-radius:16px;border-left:4px solid #e91e63;">
+        <strong style="color:#c2185b;">${b.lab || 'Appointment'}</strong><br>
+        ${b.name} • ${b.date} at ${b.time}
+      </div>
+    `).join('');
+  }
+
+  // Load on page load too
+  window.addEventListener('load', loadBookings);
+</script>
+</body>
+</html>

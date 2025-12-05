@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login • MommyGlow</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --pink: #e91e63;
+      --pink-dark: #c2185b;
+      --dark: #1a1a1a;
+      --gray: #666;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fff0f8 0%, #fce4ec 50%, #f8bbd0 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Soft background glow circles */
+    body::before,
+    body::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(233,30,99,0.15) 0%, transparent 70%);
+      z-index: 0;
+    }
+    body::before { width: 500px; height: 500px; top: -150px; left: -150px; }
+    body::after  { width: 600px; height: 600px; bottom: -200px; right: -200px; }
+
+    /* Login Card - Glassmorphism */
+    .login-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 32px;
+      padding: 50px 45px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(233, 30, 99, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      position: relative;
+      z-index: 1;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .logo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 42px;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--pink), #ff6b9d);
+       -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: var(--pink-dark);
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .tagline {
+      color: var(--gray);
+      font-size: 15px;
+      margin-bottom: 35px;
+    }
+
+    /* Input Fields */
+    .input-group {
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 100%;
+      padding: 16px 20px 16px 50px;
+      border: 2px solid #f0c4d5 solid;
+      border-radius: 16px;
+      font-size: 16px;
+      background: #fff;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--pink);
+      box-shadow: 0 0 0 4px rgba(233, 30, 99, 0.15);
+    }
+
+    .input-group i {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--pink);
+      font-size: 18px;
+    }
+
+    /* Dark Premium Button */
+    button {
+      width: 100%;
+      padding: 16px;
+      background: var(--dark);
+      color: white;
+      border: none;
+      border-radius: 16px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #000;
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    }
+
+    /* Message */
+    .message {
+      background: #ffebee;
+      color: #c62828;
+      padding: 12px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      border-left: 4px solid #e91e63;
+    }
+
+    /* Sign Up Link */
+    .signup-link {
+      margin-top: 25px;
+      font-size: 15px;
+      color: var(--gray);
+    }
+
+    .signup-link a {
+      color: var(--pink);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .login-card { padding: 40px 30px; }
+      .logo { font-size: 36px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-card">
+    <div class="logo">MommyGlow</div>
+    <h2>Welcome Back</h2>
+    <p class="tagline">Log in to continue your beautiful journey</p>
+
+    <% if(message){ %>
+      <div class="message"><%= message %></div>
+    <% } %>
+
+    <form action="/login" method="POST">
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" name="email" placeholder="Email Address" required />
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" name="password" placeholder="Password" required />
+      </div>
+
+      <button type="submit">Login Securely</button>
+    </form>
+
+    <div class="signup-link">
+      New here? <a href="/signup">Create Free Account</a>
+    </div>
+  </div>
+
+</body>
+</html>
