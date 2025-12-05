@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fourth Month • MommyGlow</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+  <style>
+    :root {
+      --pink: #e91e63;
+      --pink-dark: #c2185b;
+      --pink-light: #fce4ec;
+      --pink-glow: #ff4081;
+      --gold: #ff8a65;
+      --peach: #ffccbc;
+      --cream: #fff8e1;
+      --success: #4caf50;
+      --danger: #f44336;
+      --info: #2196f3;
+      --warning: #ff9800;
+      --purple: #9c27b0;
+      --teal: #00bcd4;
+      --green: #8bc34a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fff5f7 0%, #fce4ec 40%, #f8bbd0 100%);
+      background-attachment: fixed;
+      color: #444;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background Waves */
+    .wave-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.15;
+    }
+    .wave {
+      position: absolute;
+      bottom: 0;
+      width: 200%;
+      height: 50vh;
+      background: linear-gradient(transparent, var(--pink));
+      animation: wave 20s linear infinite;
+    }
+    .wave:nth-child(2) { animation-delay: -10s; opacity: 0.6; }
+    @keyframes wave { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* Glassmorphic Header */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(255, 255, 255, 0.93);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(233,30,99,0.2);
+      padding: 18px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 9999;
+      box-shadow: 0 10px 40px rgba(233,30,99,0.25);
+    }
+    .logo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 42px;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--pink), #ff6b9d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .back-btn {
+      padding: 12px 32px;
+      background: var(--pink);
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(233,30,99,0.35);
+      transition: all 0.4s ease;
+    }
+    .back-btn:hover {
+      transform: translateY(-5px) scale(1.06);
+      box-shadow: 0 20px 45px rgba(233,30,99,0.5);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 140px auto 80px;
+      padding: 0 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3.4rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--pink-dark), var(--pink), #ff8ab3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+      animation: heartbeat 3s ease-in-out infinite;
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 1.35rem;
+      color: #666;
+      max-width: 900px;
+      margin: 0 auto 60px;
+      font-weight: 500;
+      line-height: 1.7;
+      font-style: italic;
+      color: var(--pink-dark);
+    }
+
+    /* Floating Glass Cards */
+    .section, .emergency-box, .family-box {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(20px);
+      border-radius: 28px;
+      padding: 38px 34px;
+      margin: 48px 0;
+      box-shadow: 0 20px 60px rgba(233,30,99,0.22);
+      border: 1px solid rgba(233,30,99,0.15);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .section:hover, .emergency-box:hover, .family-box:hover {
+      transform: translateY(-18px) scale(1.025);
+      box-shadow: 0 50px 110px rgba(233,30,99,0.38);
+    }
+    .section::before {
+      content: '';
+      position: absolute;
+      top: -60%; left: -60%;
+      width: 220%; height: 220%;
+      background: radial-gradient(circle, rgba(233,30,99,0.14) 0%, transparent 65%);
+      opacity: 0;
+      transition: opacity 0.8s;
+    }
+    .section:hover::before { opacity: 1; }
+
+    h2.section-title {
+      font-size: 2.2rem;
+      color: var(--pink-dark);
+      margin-bottom: 28px;
+      font-weight: 700;
+      text-align: center;
+      position: relative;
+    }
+    h2.section-title::after {
+      content: '';
+      width: 130px;
+      height: 6px;
+      background: linear-gradient(90deg, transparent, var(--pink), transparent);
+      display: block;
+      margin: 16px auto 0;
+      border-radius: 50px;
+    }
+
+    /* Do / Don't Grid */
+    .flex-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      margin-top: 20px;
+    }
+    @media (max-width: 768px) {
+      .flex-grid { grid-template-columns: 1fr; gap: 26px; }
+      h1 { font-size: 2.6rem; }
+      main { margin: 120px auto 60px; padding: 0 15px; }
+      .section, .emergency-box, .family-box { padding: 30px 24px; }
+    }
+
+    .do-box, .avoid-box {
+      background: rgba(255,255,255,0.92);
+      padding: 28px;
+      border-radius: 22px;
+      backdrop-filter: blur(12px);
+      transition: all 0.4s ease;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+    .do-box { border-left: 7px solid var(--success); background: #f8fff8; }
+    .avoid-box { border-left: 7px solid var(--danger); background: #fff8f8; }
+
+    .do-box:hover, .avoid-box:hover { transform: translateY(-8px); }
+
+    .do-box h4, .avoid-box h4 {
+      font-size: 1.55rem;
+      margin-bottom: 20px;
+      text-align: center;
+      padding-bottom: 10px;
+      border-bottom: 3px solid;
+      font-weight: 700;
+    }
+    .do-box h4 { color: var(--success); border-color: var(--success); }
+    .avoid-box h4 { color: var(--danger); border-color: var(--danger); }
+
+    ul { list-style: none; }
+    li {
+      padding: 14px 0;
+      font-size: 1.1rem;
+      position: relative;
+      padding-left: 48px;
+      transition: all 0.3s ease;
+    }
+    li:hover { transform: translateX(8px); }
+
+    .do-item::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      font-size: 1.9rem;
+      color: var(--success);
+      font-weight: bold;
+      animation: pulse 2.5s infinite;
+    }
+    .avoid-item::before {
+      content: "✕";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      font-size: 1.9rem;
+      color: var(--danger);
+      font-weight: bold;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* Tip Box */
+    .tip-box {
+      background: linear-gradient(135deg, #fff8e1, #ffecb3);
+      border-left: 7px solid var(--warning);
+      padding: 20px 28px;
+      border-radius: 20px;
+      margin: 28px 0;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #e65100;
+      text-align: center;
+      box-shadow: 0 12px 35px rgba(255,193,7,0.25);
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Emergency & Family Boxes */
+    .emergency-box {
+      background: linear-gradient(135deg, #ffebee, #ffcdd2);
+      border: 2px solid #ff5252;
+    }
+    .family-box {
+      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+      border: 2px solid #64b5f6;
+    }
+    .emergency-box h2, .family-box h2 { color: inherit; font-size: 2.3rem; }
+
+    /* Section Color Accents */
+    .diet { border-left: 7px solid var(--warning); }
+    .activity { border-left: 7px solid var(--info); }
+    .lifestyle { border-left: 7px solid var(--purple); }
+    .mental { border-left: 7px solid var(--pink); }
+    .medical { border-left: 7px solid var(--teal); }
+    .symptoms { border-left: 7px solid var(--green); }
+  </style>
+</head>
+<body>
+
+  <div class="wave-bg">
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+
+  <header>
+    <div class="logo">MommyGlow</div>
+    <div>
+      <% if(name){ %>
+        <a href="/precautions" class="back-btn">Back to Journey</a>
+      <% } else { %>
+        <a href="/" class="back-btn">Back to Home</a>
+      <% } %>
+    </div>
+  </header>
+
+  <main>
+    <h1>Fourth Month of Pregnancy</h1>
+    <p class="subtitle">Welcome to the 2nd Trimester! Your baby starts hearing sounds, facial features are forming beautifully, and you’ll soon feel those magical first flutters.</p>
+
+    <!-- All your existing sections remain exactly the same -->
+    <!-- Diet Precautions -->
+    <div class="section diet">
+      <h2 class="section-title">Diet Precautions</h2>
+      <div class="flex-grid">
+        <div class="do-box">
+          <h4>Include</h4>
+          <ul>
+            <li class="do-item">Calcium foods: Milk, curd, ragi</li>
+            <li class="do-item">Iron rich: Spinach, beetroot, jaggery, dates</li>
+            <li class="do-item">Protein: Eggs, paneer, dal, chicken, fish (well cooked)</li>
+            <li class="do-item">Healthy fats: Nuts, ghee in small amount</li>
+            <li class="do-item">Fiber rich foods: Fruits, vegetables, oats</li>
+            <li class="do-item">Drink 3–3.5 liters water → prevents constipation</li>
+          </ul>
+        </div>
+        <div class="avoid-box">
+          <h4>Avoid</h4>
+          <ul>
+            <li class="avoid-item">Too much sugar & fried foods</li>
+            <li class="avoid-item">Pickles and high salt foods (BP rise)</li>
+            <li class="avoid-item">Uncooked/packaged meats</li>
+            <li class="avoid-item">Soda & energy drinks</li>
+            <li class="avoid-item">Excess caffeine (>1 cup/day)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tip-box">Continue Calcium + Vitamin D + Folic Acid supplements</div>
+    </div>
+
+    <!-- (All other sections — Activity, Mental, Lifestyle, Medical, Symptoms, Emergency, Family — remain unchanged in content) -->
+    <!-- I've kept them exactly as you wrote, just wrapped in the new gorgeous styling -->
+
+    <!-- Physical Activity -->
+    <div class="section activity">
+      <h2 class="section-title">Physical Activity & Exercise Precautions</h2>
+      <div class="flex-grid">
+        <div class="do-box">
+          <h4>Do</h4>
+          <ul>
+            <li class="do-item">Walk 30–45 mins daily</li>
+            <li class="do-item">Prenatal yoga and pelvic strengthening exercises</li>
+            <li class="do-item">Gentle stretching for back pain</li>
+          </ul>
+        </div>
+        <div class="avoid-box">
+          <h4>Avoid</h4>
+          <ul>
+            <li class="avoid-item">Sleeping flat on the back for long time</li>
+            <li class="avoid-item">Heavy lifting</li>
+            <li class="avoid-item">High-impact exercises (running, jumping)</li>
+            <li class="avoid-item">Housework that puts strain (mopping, fast bending)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tip-box">Use pillow between legs while sleeping</div>
+    </div>
+
+    <!-- Mental Health -->
+    <div class="section mental">
+      <h2 class="section-title">Mental Health & Emotional Care</h2>
+      <div class="flex-grid">
+        <div class="do-box">
+          <h4>Do</h4>
+          <ul>
+            <li class="do-item">Practice relaxation breathing</li>
+            <li class="do-item">Spend time with positive people</li>
+            <li class="do-item">Keep away from unnecessary stress</li>
+          </ul>
+        </div>
+        <div class="avoid-box">
+          <h4>Avoid</h4>
+          <ul>
+            <li class="avoid-item">Negative thoughts or arguments</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hygiene & Lifestyle -->
+    <div class="section lifestyle">
+      <h2 class="section-title">Hygiene & Lifestyle Precautions</h2>
+      <div class="flex-grid">
+        <div class="do-box">
+          <h4>Do</h4>
+          <ul>
+            <li class="do-item">Maintain oral hygiene (dental check if required)</li>
+            <li class="do-item">Take a bath daily, keep private area clean</li>
+            <li class="do-item">Wear comfortable cotton innerwear</li>
+          </ul>
+        </div>
+        <div class="avoid-box">
+          <h4>Avoid</h4>
+          <ul>
+            <li class="avoid-item">Exposure to chemical products, strong perfumes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Medical Checkups -->
+    <div class="section medical">
+      <h2 class="section-title">Medical Checkups in Month-4</h2>
+      <ul>
+        <li class="do-item">Second-trimester scan / early anomaly scan possible</li>
+        <li class="do-item">Weight & BP monitoring</li>
+        <li class="do-item">Urine test for infection</li>
+        <li class="do-item">Thyroid and hemoglobin check if needed</li>
+      </ul>
+      <div class="tip-box">Fetal movement might start soon (as light flutters)</div>
+    </div>
+
+    <!-- Normal Body Changes -->
+    <div class="section symptoms">
+      <h2 class="section-title">Normal Body Changes this Month</h2>
+      <ul>
+        <li class="do-item">Increased appetite</li>
+        <li class="do-item">Reduced nausea</li>
+        <li class="do-item">Abdomen becomes slightly visible</li>
+        <li class="do-item">Back pain may start</li>
+        <li class="do-item">Leg cramps possible</li>
+        <li class="do-item">Skin changes (dark line on belly: linea nigra)</li>
+      </ul>
+      <p style="text-align:center; color:#2e7d32; font-weight:600; margin-top:20px; font-size:1.2rem;">
+        ➤ These are completely normal — enjoy the glow!
+      </p>
+    </div>
+
+    <!-- Warning Symptoms -->
+    <div class="emergency-box">
+      <h2 class="section-title">Warning Symptoms — Immediate Doctor Visit</h2>
+      <ul style="display:inline-block; text-align:left; max-width:720px; margin-top:24px; font-size:1.15rem;">
+        <li class="avoid-item">Heavy bleeding</li>
+        <li class="avoid-item">Severe abdominal cramps</li>
+        <li class="avoid-item">Sudden swelling (face/hands)</li>
+        <li class="avoid-item">Severe headache or vision changes</li>
+        <li class="avoid-item">High fever</li>
+        <li class="avoid-item">Very bad smell discharge</li>
+        <li class="avoid-item">No improvement from vomiting</li>
+      </ul>
+    </div>
+
+    <!-- Family Support -->
+    <div class="family-box">
+      <h2 class="section-title">Family Support Tips</h2>
+      <ul style="display:inline-block; text-align:left; max-width:720px; margin-top:24px; font-size:1.15rem;">
+        <li class="do-item">Encourage healthy eating and walking</li>
+        <li class="do-item">Avoid giving emotional stress</li>
+        <li class="do-item">Help with household chores</li>
+      </ul>
+    </div>
+
+  </main>
+</body>
+</html>

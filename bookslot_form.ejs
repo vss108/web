@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Book Slot • <%= lab.name %> • MommyGlow</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+  <style>
+    :root {
+      --pink: #e91e63;
+      --pink-dark: #c2185b;
+      --pink-glow: #ff6b9d;
+      --light-pink: #fce4ec;
+      --white: #ffffff;
+      --text: #444;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fff0f8 0%, #fce4ec 45%, #f8bbd0 100%);
+      background-size: 400% 400%;
+      animation: gradient 18s ease infinite;
+      min-height: 100vh;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Gentle Wave Background */
+    .wave-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .wave {
+      position: absolute;
+      bottom: 0;
+      width: 200%;
+      height: 45vh;
+      background: linear-gradient(transparent, rgba(233,30,99,0.1));
+      animation: wave 22s linear infinite;
+    }
+    .wave:nth-child(2) { animation-delay: -11s; opacity: 0.6; }
+    @keyframes wave { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* Glass Header */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(25px);
+      border-bottom: 1px solid rgba(233,30,99,0.15);
+      padding: 18px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 9999;
+      box-shadow: 0 10px 40px rgba(233,30,99,0.2);
+    }
+    .logo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 44px;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--pink), #ff8ab3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    main {
+      max-width: 780px;
+      margin: 140px auto 80px;
+      padding: 0 20px;
+    }
+
+    /* Premium Floating Card */
+    .card {
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(22px);
+      border-radius: 32px;
+      padding: 40px 36px;
+      box-shadow: 0 25px 60px rgba(233,30,99,0.28);
+      border: 1px solid rgba(233,30,99,0.18);
+      position: relative;
+      overflow: hidden;
+      animation: floatIn 1.2s ease-out;
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(40px) scale(0.95); }
+      to { opacity: 1; transform: none; }
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(233,30,99,0.16) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.8s;
+    }
+    .card:hover::before { opacity: 1; }
+    .card:hover {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: 0 45px 100px rgba(233,30,99,0.4);
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2.8rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--pink-dark), var(--pink), #ff8ab3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+    @keyframes glow { from { text-shadow: 0 0 30px #ff6b9d; } to { text-shadow: 0 0 60px #ff1493; } }
+
+    .lab-info {
+      text-align: center;
+      background: rgba(233,30,99,0.08);
+      padding: 18px;
+      border-radius: 20px;
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+      color: var(--pink-dark);
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: 600;
+      color: var(--pink-dark);
+      font-size: 1.05rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 14px 16px;
+      margin-top: 8px;
+      border-radius: 16px;
+      border: 2px solid #ffb9cd;
+      background: rgba(255,255,255,0.9);
+      font-size: 1rem;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(5px);
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--pink);
+      box-shadow: 0 0 20px rgba(233,30,99,0.3);
+      transform: scale(1.02);
+    }
+
+    textarea { resize: vertical; min-height: 100px; }
+
+    /* Confirm Button - Sparkling Magic */
+    #confirmBtn {
+      margin-top: 32px;
+      width: 100%;
+      padding: 18px;
+      border-radius: 50px;
+      background: linear-gradient(45deg, var(--pink), #ff6b9d);
+      color: white;
+      border: none;
+      font-size: 1.3rem;
+      font-weight: 700;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 35px rgba(233,30,99,0.4);
+      transition: all 0.5s ease;
+    }
+    #confirmBtn:hover {
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 20px 50px rgba(233,30,99,0.55);
+    }
+    #confirmBtn::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 0; height: 0;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    #confirmBtn:active::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .error-box {
+      background: #ffebee;
+      color: #c62828;
+      padding: 16px;
+      border-radius: 16px;
+      border-left: 5px solid #e91e63;
+      margin: 20px 0;
+      font-weight: 500;
+    }
+
+    /* Beautiful Success Popup */
+    .success-popup {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      background: white;
+      padding: 40px;
+      border-radius: 32px;
+      box-shadow: 0 30px 80px rgba(233,30,99,0.4);
+      text-align: center;
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.5s ease;
+    }
+    .success-popup.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .success-popup i {
+      font-size: 5rem;
+      color: #28a745;
+      margin-bottom: 20px;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 16px 20px; }
+      main { margin: 120px auto 60px; padding: 0 15px; }
+      h2 { font-size: 2.3rem; }
+      .card { padding: 30px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wave-bg">
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+
+<header>
+  <div class="logo">MommyGlow</div>
+  <div style="color:var(--pink-dark); font-weight:600;">
+    Hello, <%= user?.name || 'Mommy' %>!
+  </div>
+</header>
+
+<main>
+  <div class="card">
+    <h2>Book Your Slot</h2>
+    
+    <div class="lab-info">
+      <p><strong><%= lab.name %></strong></p>
+      <p><%= lab.location %> • <%= lab.phone || 'Contact via form' %></p>
+    </div>
+
+    <form method="post" action="/book-slot" id="bookingForm">
+      <input type="hidden" name="labId" value="<%= lab._id %>">
+      <input type="hidden" name="lab" value="<%= lab.name %>">
+
+      <% if (errors && errors.length) { %>
+        <div class="error-box">
+          <strong>Please fix the following:</strong>
+          <ul style="margin-top:8px; text-align:left;">
+            <% errors.forEach(e => { %>
+              <li><%= e.msg %></li>
+            <% }) %>
+          </ul>
+        </div>
+      <% } %>
+
+      <label>Your Name</label>
+      <input name="name" required value="<%= user?.name || '' %>" placeholder="Enter your full name">
+
+      <label>Phone Number</label>
+      <input name="phone" value="<%= user?.phone || '' %>" placeholder="e.g. 9876543210">
+
+      <label>Email Address</label>
+      <input name="email" type="email" value="<%= user?.email || '' %>">
+
+      <label>Preferred Date</label>
+      <input name="date" type="date" required>
+
+      <label>Preferred Time</label>
+      <input name="time" type="time" required>
+
+      <label>Tests Required / Special Notes</label>
+      <textarea name="notes" placeholder="e.g. Glucose test, NT scan, anemia profile..."></textarea>
+
+      <button type="button" id="confirmBtn">
+        Confirm & Book Slot
+      </button>
+    </form>
+  </div>
+</main>
+
+<!-- Success Popup -->
+<div class="success-popup" id="successPopup">
+  <i class="fas fa-heart"></i>
+  <h3>Booking Confirmed!</h3>
+  <p>Your slot at <strong><%= lab.name %></strong> has been successfully booked.</p>
+  <p>We’ve sent a confirmation to your phone & email.</p>
+  <button onclick="window.location.href='/precautions'" style="margin-top:20px; padding:12px 30px; background:var(--pink); color:white; border:none; border-radius:50px; font-weight:600; cursor:pointer;">
+    Continue to Precautions
+  </button>
+</div>
+
+<script>
+  document.getElementById("confirmBtn").addEventListener("click", function () {
+    const form = document.getElementById("bookingForm");
+    const name = form.name.value.trim();
+    const date = form.date.value;
+    const time = form.time.value;
+
+    if (!name || !date || !time) {
+      alert("Please fill all required fields");
+      return;
+    }
+
+    // Save to localStorage
+    const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+    bookings.push({
+      lab: '<%= lab.name %>',
+      name: name,
+      date: date,
+      time: time
+    });
+    localStorage.setItem('bookings', JSON.stringify(bookings));
+
+    // Show beautiful popup
+    document.getElementById("successPopup").classList.add("show");
+
+    // Submit form in background
+    setTimeout(() => {
+      form.submit();
+    }, 800);
+  });
+</script>
+
+</body>
+</html>

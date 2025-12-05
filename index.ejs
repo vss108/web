@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MommyGlow • Pregnancy Care</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --pink: #e91e63;
+      --pink-dark: #c2185b;
+      --pink-light: #fce4ec;
+      --text: #444;
+      --bg: linear-gradient(135deg, #fff5f8 0%, #fce4ec 50%, #f8bbd0 100%);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* Clean Header - Fixed & Glassy */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(233, 30, 99, 0.1);
+      padding: 18px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 8px 30px rgba(233, 30, 99, 0.12);
+    }
+    .logo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--pink);
+      letter-spacing: 1px;
+    }
+
+    /* Dark & Premium Buttons */
+    .nav-btn {
+      padding: 12px 28px;
+      margin-left: 12px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.4s ease;
+    }
+    .login {
+      background: #333;
+      color: white;
+    }
+    .signup {
+      background: var(--pink);
+      color: white;
+      box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
+    }
+    .nav-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    }
+    .signup:hover {
+      background: var(--pink-dark);
+    }
+
+    /* Main Content */
+    main {
+      padding: 140px 20px 100px;
+      max-width: 1300px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    h1 {
+      font-size: 4.5rem;
+      font-weight: 700;
+      color: var(--pink-dark);
+      margin-bottom: 20px;
+      animation: softGlow 4s ease-in-out infinite alternate;
+    }
+    @keyframes softGlow {
+      from { text-shadow: 0 0 20px rgba(233,30,99,0.3); }
+      to { text-shadow: 0 0 40px rgba(233,30,99,0.5); }
+    }
+    .subtitle {
+      font-size: 1.4rem;
+      color: #666;
+      max-width: 800px;
+      margin: 0 auto 70px;
+    }
+
+    /* Hero Image */
+    .hero-img {
+      max-width: 900px;
+      margin: 0 auto 90px;
+      border-radius: 34px;
+      overflow: hidden;
+      box-shadow: 0 25px 70px rgba(233, 30, 99, 0.25);
+    }
+    .hero-img img {
+      width: 100%;
+      display: block;
+      transition: transform 0.8s ease;
+    }
+    .hero-img:hover img { transform: scale(1.08); }
+
+    /* Section Titles */
+    h2 {
+      font-size: 3rem;
+      color: var(--pink-dark);
+      margin: 90px 0 60px;
+      position: relative;
+    }
+    h2::after {
+      content: '';
+      width: 120px;
+      height: 5px;
+      background: var(--pink);
+      display: block;
+      margin: 20px auto;
+      border-radius: 10px;
+    }
+
+    /* Clean Cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 35px;
+      margin-bottom: 100px;
+    }
+    .card {
+      background: white;
+      border-radius: 28px;
+      padding: 40px 25px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(233, 30, 99, 0.15);
+      transition: all 0.5s ease;
+    }
+    .card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 30px 60px rgba(233, 30, 99, 0.25);
+    }
+    .card i {
+      font-size: 3.5rem;
+      color: var(--pink);
+      margin-bottom: 20px;
+    }
+    .card h3 {
+      font-size: 1.6rem;
+      color: var(--pink-dark);
+      margin-bottom: 15px;
+    }
+
+    /* Month Cards */
+    .months {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 40px;
+      padding: 0 20px 120px;
+    }
+    .month-card {
+      background: white;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(233, 30, 99, 0.2);
+      transition: all 0.6s ease;
+    }
+    .month-card:hover {
+      transform: translateY(-20px);
+      box-shadow: 0 40px 80px rgba(233, 30, 99, 0.3);
+    }
+    .month-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+    }
+    .month-info {
+      padding: 28px;
+      text-align: center;
+    }
+    .month h3 {
+      font-size: 2rem;
+      color: var(--pink-dark);
+      margin-bottom: 10px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 { font-size: 3.2rem; }
+      h2 { font-size: 2.5rem; }
+      header { padding: 15px 20px; }
+      .nav-btn { padding: 10px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">MommyGlow</div>
+    <div>
+      <a href="/login" class="nav-btn login">Login</a>
+      <a href="/signup" class="nav-btn signup">Join Free</a>
+    </div>
+  </header>
+
+  <main>
+    <h1>Your Beautiful Journey Begins</h1>
+    <p class="subtitle">Expert guidance, month-by-month baby growth tracker, and loving care tips for you and your little one.</p>
+
+    <div class="hero-img">
+      <img src="https://images.pexels.com/photos/4422629/pexels-photo-4422629.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Pregnant Mom">
+    </div>
+
+    <h2>Essential Pregnancy Care</h2>
+    <div class="grid">
+      <div class="card"><i class="fas fa-utensils"></i><h3>Healthy Diet</h3><p>Rich in folic acid, iron & protein</p></div>
+      <div class="card"><i class="fas fa-tint"></i><h3>Stay Hydrated</h3><p>3–4 liters water daily</p></div>
+      <div class="card"><i class="fas fa-walking"></i><h3>Light Exercise</h3><p>Walk & prenatal yoga</p></div>
+      <div class="card"><i class="fas fa-stethoscope"></i><h3>Regular Checkups</h3><p>Never miss doctor visits</p></div>
+      <div class="card"><i class="fas fa-ban"></i><h3>Avoid Harmful</h3><p>No alcohol, smoking, stress</p></div>
+      <div class="card"><i class="fas fa-heart"></i><h3>Rest & Love</h3><p>Sleep well, stay happy</p></div>
+    </div>
+
+    <h2>Baby's Growth Month by Month</h2>
+    <div class="months">
+      <div class="month-card"><img src="https://images.pexels.com/photos/2908177/pexels-photo-2908177.jpeg" alt="Month 1"><div class="month"><h3>Month 1</h3><p>Heartbeat begins</p></div></div>
+      <div class="month-card"><img src="https://images.pexels.com/photos/4057644/pexels-photo-4057644.jpeg" alt="Month 2"><div class="month"><h3>Month 2</h3><p>Organs form</p></div></div>
+      <div class="month-card"><img src="https://images.pexels.com/photos/3770589/pexels-photo-3770589.jpeg" alt="Month 3"><div class="month"><h3>Month 3</h3><p>Arms & legs move</p></div></div>
+      <div class="month-card"><img src="https://images.pexels.com/photos/3905255/pexels-photo-3905255.jpeg" alt="Month 4"><div class="month"><h3>Month 4</h3><p>First kicks!</p></div></div>
+      <div class="month-card"><img src="https://images.pexels.com/photos/4057650/pexels-photo-4057650.jpeg" alt="Month 5"><div class="month"><h3>Month 5</h3><p>Hears your voice</p></div></div>
+      <div class="month-card"><img src="https://images.pexels.com/photos/4439421/pexels-photo-4439421.jpeg" alt="Month 6"><div class="month"><h3>Month 6</h3><p>Eyes open</p></div></div>
+      <div class="month-card"><img src="https://images.pexels.com/photos/4449682/pexels-photo-4449682.jpeg" alt="Month 7"><div class="month"><h3>Month 7</h3><p>Lungs develop</p></div></div>
+      <div class="month-card"><img src="https://images.pexels.com/photos/4057663/pexels-photo-4057663.jpeg" alt="Month 8"><div class="month"><h3>Month 8</h3><p>Gaining weight</p></div></div>
+      <div class="month-card"><img src="https://images.pexels.com/photos/4057670/pexels-photo-4057670.jpeg" alt="Month 9"><div class="month"><h3>Month 9</h3><p>Ready to meet you!</p></div></div>
+    </div>
+  </main>
+</body>
+</html>

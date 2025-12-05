@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First Month • MommyGlow</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+  <style>
+    :root {
+      --pink: #e91e63;
+      --pink-dark: #c2185b;
+      --pink-glow: #ff6b9d;
+      --light-pink: #fce4ec;
+      --white: #ffffff;
+      --success: #28a745;
+      --danger: #d32f2f;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fff0f8 0%, #fce4ec 45%, #f8bbd0 100%);
+      background-size: 400% 400%;
+      animation: gradient 20s ease infinite;
+      color: #444;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    @keyframes gradient { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+    /* Wave Background */
+    .wave-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .wave {
+      position: absolute;
+      bottom: 0;
+      width: 200%;
+      height: 40vh;
+      background: linear-gradient(transparent, rgba(233,30,99,0.08));
+      animation: wave 22s linear infinite;
+    }
+    .wave:nth-child(2) { animation-delay: -11s; opacity: 0.6; }
+    @keyframes wave { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* Glass Header */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(25px);
+      border-bottom: 1px solid rgba(233,30,99,0.15);
+      padding: 18px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 9999;
+      box-shadow: 0 15px 50px rgba(233,30,99,0.25);
+    }
+    .logo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 46px;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--pink), #ff8ab3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .back-btn {
+      padding: 12px 28px;
+      background: var(--pink);
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(233,30,99,0.3);
+      transition: all 0.4s ease;
+    }
+    .back-btn:hover {
+      transform: translateY(-6px) scale(1.05);
+      box-shadow: 0 20px 40px rgba(233,30,99,0.45);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 140px auto 100px;
+      padding: 0 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3.6rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--pink-dark), var(--pink), #ff8ab3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+      animation: heartbeat 3s ease-in-out infinite;
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 1.3rem;
+      color: #666;
+      max-width: 800px;
+      margin: 0 auto 60px;
+      font-weight: 500;
+      font-style: italic;
+    }
+
+    /* Floating Section Cards */
+    .section {
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(20px);
+      border-radius: 28px;
+      padding: 32px 28px;
+      margin: 40px 0;
+      box-shadow: 0 20px 50px rgba(233,30,99,0.22);
+      border: 1px solid rgba(233,30,99,0.15);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .section:hover {
+      transform: translateY(-18px) scale(1.03);
+      box-shadow: 0 40px 90px rgba(233,30,99,0.4);
+    }
+    .section::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(233,30,99,0.12) 0%, transparent 70%);
+      opacity: 0;
+      transition: 0.8s;
+    }
+    .section:hover::before { opacity: 1; }
+
+    h2.section-title {
+      font-size: 2rem;
+      color: var(--pink-dark);
+      margin-bottom: 24px;
+      font-weight: 700;
+      text-align: center;
+      position: relative;
+    }
+    h2.section-title::after {
+      content: '';
+      width: 100px;
+      height: 5px;
+      background: linear-gradient(90deg, transparent, var(--pink), transparent);
+      display: block;
+      margin: 16px auto 0;
+      border-radius: 50px;
+    }
+
+    /* Do / Don't Grid */
+    .flex-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-top: 20px;
+    }
+    .do-box, .avoid-box {
+      background: rgba(255,255,255,0.8);
+      padding: 24px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+    }
+    .do-box {
+      border-left: 6px solid var(--success);
+      background: #f8fff8;
+    }
+    .avoid-box {
+      border-left: 6px solid var(--danger);
+      background: #fff8f8;
+    }
+
+    .do-box h3, .avoid-box h3 {
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .do-box h3 { color: var(--success); }
+    .avoid-box h3 { color: var(--danger); }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    li {
+      padding: 10px 0;
+      font-size: 1.05rem;
+      position: relative;
+      padding-left: 40px;
+      transition: all 0.3s ease;
+    }
+    li:hover { transform: translateX(8px); }
+
+    .do-item::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      font-size: 1.6rem;
+      color: var(--success);
+      font-weight: bold;
+      animation: pulse 2s infinite;
+    }
+    .avoid-item::before {
+      content: "✕";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      font-size: 1.6rem;
+      color: var(--danger);
+      font-weight: bold;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* Special Boxes */
+    .emergency-box, .family-box {
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(20px);
+      border-radius: 28px;
+      padding: 32px;
+      margin: 50px 0;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+      border: 2px solid;
+    }
+    .emergency-box {
+      border-color: #ff5252;
+      background: linear-gradient(135deg, #ffebee, #ffcdd2);
+    }
+    .family-box {
+      border-color: #64b5f6;
+      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    }
+    .emergency-box h2, .family-box h2 {
+      color: #c62828;
+      font-size: 2rem;
+    }
+    .family-box h2 { color: #1976d2; }
+
+    @media (max-width: 768px) {
+      header { padding: 16px 20px; flex-direction: column; gap: 12px; }
+      h1 { font-size: 2.6rem; }
+      main { margin: 120px auto 60px; padding: 0 15px; }
+      .flex-grid { grid-template-columns: 1fr; gap: 20px; }
+      .section, .emergency-box, .family-box { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wave-bg">
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+
+<header>
+  <div class="logo">MommyGlow</div>
+  <div>
+    <% if(name){ %>
+      <a href="/precautions" class="back-btn">Back to Journey</a>
+    <% } else { %>
+      <a href="/" class="back-btn">Back to Home</a>
+    <% } %>
+  </div>
+</header>
+
+<main>
+  <h1>First Month of Pregnancy</h1>
+  <p class="subtitle">This is the most precious and sensitive time — your baby’s brain, heart, and spine are beginning to form. Every care counts!</p>
+
+  <!-- Diet -->
+  <div class="section">
+    <h2 class="section-title">Diet & Nutrition</h2>
+    <div class="flex-grid">
+      <div class="do-box">
+        <h3>Include These</h3>
+        <ul>
+          <li class="do-item">Folic acid-rich foods: Spinach, lentils, oranges</li>
+          <li class="do-item">Iron-rich: Dates, pomegranate, beetroot</li>
+          <li class="do-item">Protein: Milk, curd, paneer, eggs</li>
+          <li class="do-item">Stay hydrated — 2.5–3 liters water daily</li>
+        </ul>
+      </div>
+      <div class="avoid-box">
+        <h3>Avoid These</h3>
+        <ul>
+          <li class="avoid-item">Raw papaya & pineapple</li>
+          <li class="avoid-item">Alcohol, smoking, tobacco</li>
+          <li class="avoid-item">Excess caffeine (>1 cup/day)</li>
+          <li class="avoid-item">High-mercury fish & raw meat</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Medical -->
+  <div class="section">
+    <h2 class="section-title">Medical Care</h2>
+    <div class="flex-grid">
+      <div class="do-box">
+        <h3>Do This</h3>
+        <ul>
+          <li class="do-item">Start Folic Acid 400mcg daily</li>
+          <li class="do-item">Visit gynecologist for confirmation</li>
+          <li class="do-item">Inform doctor about all medicines</li>
+          <li class="do-item">Control blood sugar & thyroid</li>
+        </ul>
+      </div.',
+      <div class="avoid-box">
+        <h3>Avoid This</h3>
+        <ul>
+          <li class="avoid-item">Self-medication</li>
+          <li class="avoid-item">X-rays (unless emergency)</li>
+          <li class="avoid-item">Painkillers without prescription</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Activity -->
+  <div class="section">
+    <h2 class="section-title">Activity & Lifestyle</h2>
+    <div class="flex-grid">
+      <div class="do-box">
+        <h3>Do This</h3>
+        <ul>
+          <li class="do-item">Light walking 20–30 mins daily</li>
+          <li class="do-item">Sleep 8–9 hours</li>
+          <li class="do-item">Move slowly, avoid sudden jerks</li>
+          <li class="do-item">Wear comfortable shoes</li>
+        </ul>
+      </div>
+      <div class="avoid-box">
+        <h3>Avoid This</h3>
+        <ul>
+          <li class="avoid-item">Heavy lifting</li>
+          <li class="avoid-item">Running, jumping, strenuous exercise</li>
+          <li class="avoid-item">Long travel on bumpy roads</li>
+          <li class="avoid-item">Exposure to chemicals/pesticides</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mental Health -->
+  <div class="section">
+    <h2 class="section-title">Mental Wellness</h2>
+    <div class="flex-grid">
+      <div class="do-box">
+        <h3>Do This</h3>
+        <ul>
+          <li class="do-item">Stay calm & positive</li>
+          <li class="do-item">Practice deep breathing</li>
+          <li class="do-item">Talk to loved ones</li>
+        </ul>
+      </div>
+      <div class="avoid-box">
+        <h3>Avoid This</h3>
+        <ul>
+          <li class="avoid-item">Stress & overthinking</li>
+          <li class="avoid-item">Negative people/news</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Emergency -->
+  <div class="emergency-box">
+    <h2 class="section-title">Emergency Signs — Call Doctor Immediately</h2>
+    <ul style="display:inline-block;text-align:left;max-width:600px;margin-top:20px;">
+      <li class="avoid-item">Severe abdominal pain or cramps</li>
+      <li class="avoid-item">Vaginal bleeding or spotting</li>
+      <li class="avoid-item">Excessive vomiting & dizziness</li>
+      <li class="avoid-item">High fever or fainting</li>
+    </ul>
+  </div>
+
+  <!-- Family Support -->
+  <div class="family-box">
+    <h2 class="section-title">Family & Partner Support</h2>
+    <ul style="display:inline-block;text-align:left;max-width:600px;margin-top:20px;">
+      <li class="do-item">Be extra gentle and supportive</li>
+      <li class="do-item">Help with household chores</li>
+      <li class="do-item">Keep the environment peaceful and loving</li>
+      <li class="do-item">Celebrate this beautiful journey together</li>
+    </ul>
+  </div>
+</main>
+
+</body>
+</html>

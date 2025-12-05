@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MommyGlow • Pregnancy Care</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --pink: #ffb3c6; --gold: #ffd7a8; --glow: #ff8cb9; --green: #4ade80;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff1f8 0%, #f8e8ff 50%, #e8f5ff 100%);
+            min-height: 100vh; overflow-x:hidden; position:relative; color:#444;
+        }
+
+        /* Animated Waves */
+        .waves { position:fixed; bottom:0; left:0; width:100%; height:40vh; z-index:-1; pointer-events:none; }
+        .wave { position:absolute; bottom:0; width:200%; height:200px; background-repeat:repeat-x; animation:wave 12s linear infinite; }
+        .wave:nth-child(2) { bottom:20px; opacity:0.6; animation:wave 18s linear infinite reverse; }
+        @keyframes wave { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+        header {
+            padding:20px 40px; display:flex; justify-content:space-between; align-items:center;
+            backdrop-filter:blur(10px); background:rgba(255,255,255,0.2);
+            border-bottom:1px solid rgba(255,179,198,0.3); position:sticky; top:0; z-index:1000;
+        }
+        .logo {
+            font-family:'Playfair Display',serif; font-size:32px;
+            background:linear-gradient(45deg,#ff8cb9,#ffd7a8,#c689ff);
+            -webkit-background-clip:text; color:transparent;
+            animation:heartbeat 2s ease-in-out infinite;
+            text-shadow:0 0 30px rgba(255,140,185,0.5);
+        }
+        @keyframes heartbeat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+
+        .top-right { display:flex; gap:15px; align-items:center; }
+        .top-right span, .top-right a {
+            background:rgba(255,255,255,0.25); backdrop-filter:blur(10px);
+            padding:10px 18px; border-radius:30px; color:#cc6699; font-weight:500;
+            text-decoration:none; border:1px solid rgba(255,182,193,0.4);
+        }
+        .bill-btn {
+            background:linear-gradient(45deg,#ffd93d,#ff8cb9); color:white;
+            border:none; padding:12px 24px; border-radius:30px; font-weight:bold;
+            cursor:pointer; box-shadow:0 10px 30px rgba(255,215,168,0.5);
+        }
+        .cart-icon {
+            position:relative; font-size:28px; cursor:pointer; padding:12px;
+            background:rgba(255,255,255,0.3); border-radius:50%; backdrop-filter:blur(10px);
+            border:1px solid rgba(255,255,255,0.4); box-shadow:0 8px 32px rgba(0,0,0,0.1);
+        }
+        .cart-badge {
+            position:absolute; top:-8px; right:-8px;
+            background:linear-gradient(45deg,#ff6b9d,#ffd93d); color:white;
+            width:26px; height:26px; border-radius:50%; font-size:12px; font-weight:bold;
+            display:flex; align-items:center; justify-content:center;
+            animation:pulse 2s infinite;
+        }
+        @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(255,107,157,0.7)} 70%{box-shadow:0 0 0 10px rgba(255,107,157,0)} 100%{box-shadow:0 0 0 0 rgba(255,107,157,0)} }
+
+        main { max-width:1300px; margin:40px auto; padding:0 20px; }
+        h1 {
+            text-align:center; font-family:'Playfair Display',serif; font-size:48px; margin:40px 0;
+            background:linear-gradient(45deg,#ff8cb9,#ffd7a8,#c689ff,#8cb8ff);
+            -webkit-background-clip:text; color:transparent;
+            animation:glow 4s ease-in-out infinite alternate;
+        }
+        @keyframes glow { from{text-shadow:0 0 20px #ff8cb9} to{text-shadow:0 0 40px #ffd7a8,0 0 60px #c689ff} }
+
+        .products-grid {
+            display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+            gap:28px; margin-top:40px;
+        }
+        .product-card {
+            background:rgba(255,255,255,0.25); backdrop-filter:blur(16px);
+            border-radius:24px; border:1px solid rgba(255,255,255,0.4);
+            overflow:hidden; box-shadow:0 20px 40px rgba(0,0,0,0.1);
+            transition:all 0.4s;
+        }
+        .product-card:hover { transform:translateY(-20px) scale(1.03); box-shadow:0 30px 60px rgba(255,140,185,0.4); }
+        .product-card img { width:100%; height:220px; object-fit:cover; }
+        .card-content { padding:24px; }
+        .price { font-size:24px; font-weight:bold; color:#ff6b9d; margin:10px 0; }
+
+        .add-btn {
+            position:relative; width:100%; padding:16px; border:none; border-radius:50px;
+            font-weight:600; cursor:pointer; overflow:hidden; font-size:15px;
+            background:linear-gradient(45deg,#ff8cb9,#ffd7a8); color:white;
+            box-shadow:0 10px 30px rgba(255,140,185,0.4); transition:all 0.4s;
+        }
+        .add-btn:hover { transform:translateY(-3px); box-shadow:0 15px 35px rgba(255,140,185,0.6); }
+        .add-btn.added {
+            background:linear-gradient(45deg,#4ade80,#22c55e);
+            animation:popIn 0.6s ease-out;
+        }
+        .add-btn.added::after {
+            content:"Added! Select one";
+            position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+            color:white; font-weight:bold; font-size:16px;
+        }
+        @keyframes popIn { 0%{transform:scale(0.8);opacity:0} 60%{transform:scale(1.1)} 100%{transform:scale(1)} }
+
+        /* Floating Cart */
+        .floating-cart {
+            position:fixed; top:100px; right:20px; width:380px;
+            background:rgba(255,255,255,0.3); backdrop-filter:blur(20px);
+            border-radius:24px; border:1px solid rgba(255,255,255,0.5);
+            box-shadow:0 20px 50px rgba(0,0,0,0.15); z-index:1000; padding:20px;
+            display:none; max-height:80vh; overflow-y:auto;
+        }
+        .floating-cart.show { display:block; animation:slideIn 0.5s; }
+        @keyframes slideIn { from{transform:translateX(100%)} to{transform:translateX(0)} }
+
+        /* BILL Modal */
+        #billModal {
+            display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+            background:rgba(0,0,0,0.6); backdrop-filter:blur(12px); z-index:2000;
+            justify-content:center; align-items:center;
+        }
+        .bill-container {
+            background:rgba(255,255,255,0.3); backdrop-filter:blur(20px);
+            border-radius:28px; width:90%; max-width:680px; padding:30px;
+            border:2px solid rgba(255,182,193,0.5); box-shadow:0 20px 60px rgba(255,140,185,0.4);
+        }
+        .bill-header {
+            display:flex; justify-content:space-between; align-items:center; margin-bottom:25px;
+            padding-bottom:15px; border-bottom:3px solid var(--pink);
+        }
+        .bill-header h2 {
+            font-size:42px; font-family:'Playfair Display',serif;
+            background:linear-gradient(45deg,#ff8cb9,#ffd7a8); -webkit-background-clip:text; color:transparent;
+        }
+        .close-bill {
+            background:#cc0000; color:white; border:none; padding:10px 20px; border-radius:50px;
+            cursor:pointer; font-weight:bold; box-shadow:0 8px 20px rgba(204,0,0,0.3);
+        }
+        .bill-table {
+            width:100%; border-collapse:collapse; margin:20px 0; background:rgba(255,255,255,0.4); border-radius:16px; overflow:hidden;
+        }
+        .bill-table th {
+            background:linear-gradient(45deg,#ff8cb9,#ffd7a8); color:white; padding:16px; text-align:center; font-weight:600;
+        }
+        .bill-table td {
+            padding:16px; text-align:center; border-bottom:1px solid rgba(255,182,193,0.3);
+            background:rgba(255,255,255,0.2);
+        }
+        .grand-total {
+            text-align:right; padding:20px; background:rgba(255,240,240,0.6);
+            border-radius:16px; font-size:28px; color:#cc6699; font-weight:bold;
+            margin-top:20px; border:2px dashed var(--pink);
+        }
+        .bill-actions {
+            display:flex; justify-content:center; gap:25px; margin-top:30px;
+        }
+        .bill-actions button {
+            padding:14px 34px; border:none; border-radius:50px; font-weight:bold;
+            cursor:pointer; font-size:16px; box-shadow:0 10px 30px rgba(0,0,0,0.2);
+        }
+        .print-btn { background:#4ade80; color:white; }
+        .continue-btn { background:linear-gradient(45deg,#ffd93d,#ff8cb9); color:white; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0); opacity: 1; }
+            100% { transform: translateY(-500px) scale(2); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="waves">
+    <div class="wave" style="background:url('data:image/svg+xml;utf8,<svg viewBox=\"0 0 1200 120\" preserveAspectRatio=\"none\"><path d=\"M0,60 C300,20 900,100 1200,60 L1200,120 L0,120 Z\" fill=\"%23ffb3c680\"/></svg>') repeat-x"></div>
+    <div class="wave" style="background:url('data:image/svg+xml;utf8,<svg viewBox=\"0 0 1200 120\" preserveAspectRatio=\"none\"><path d=\"M0,80 C400,30 800,110 1200,70 L1200,120 L0,120 Z\" fill=\"%23ffd7a899\"/></svg>') repeat-x"></div>
+</div>
+
+<header>
+    <div class="logo">MommyGlow</div>
+    <div class="top-right">
+        <span>Welcome, Beautiful Mom-to-be!</span>
+        <a href="/precautions">Precautions</a>
+        <a href="/logout">Logout</a>
+        <button class="bill-btn" id="billBtn">View Bill</button>
+        <div class="cart-icon" id="cartIcon">Cart<span class="cart-badge" id="cartBadge">0</span></div>
+    </div>
+</header>
+
+<main>
+    <h1>Pregnancy Care Treasures</h1>
+    <div class="products-grid">
+        <!-- 15 Magical Products -->
+        <div class="product-card">
+            <img src="https://source.unsplash.com/500x350/?prenatal-vitamins,glow" alt="Prenatal Vitamins">
+            <div class="card-content">
+                <h3>Prenatal Multivitamin Capsules</h3>
+                <p>Complete nutrition with DHA, folic acid & iron</p>
+                <div class="price">₹699</div>
+                <button class="add-btn" data-name="Prenatal Multivitamin Capsules" data-price="699">Add to Glow Cart</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="https://source.unsplash.com/500x350/?folic-acid,pregnancy" alt="Folic Acid">
+            <div class="card-content">
+                <h3>Folic Acid 5mg Tablets</h3>
+                <p>High-strength protection against neural tube defects</p>
+                <div class="price">₹249</div>
+                <button class="add-btn" data-name="Folic Acid 5mg Tablets" data-price="249">Add to Glow Cart</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="https://source.unsplash.com/500x350/?omega-3,pregnancy" alt="DHA">
+            <div class="card-content">
+                <h3>DHA Omega-3 Softgels</h3>
+                <p>Boosts baby’s brain & eye development</p>
+                <div class="price">₹549</div>
+                <button class="add-btn" data-name="DHA Omega-3 Softgels" data-price="549">Add to Glow Cart</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="https://source.unsplash.com/500x350/?maternity-pillow" alt="Maternity Pillow">
+            <div class="card-content">
+                <h3>U-Shape Maternity Pillow</h3>
+                <p>Full-body support for the sweetest dreams</p>
+                <div class="price">₹1,499</div>
+                <button class="add-btn" data-name="U-Shape Maternity Pillow" data-price="1499">Add to Glow Cart</button>
+            </div>
+        </div>
+        <!-- Add more as needed -->
+    </div>
+</main>
+
+<!-- Floating Cart -->
+<div class="floating-cart" id="floatingCart">
+    <h3 style="background:linear-gradient(45deg,#ff8cb9,#ffd7a8);-webkit-background-clip:text;color:transparent;">
+        Your Glow Cart
+    </h3>
+    <div id="cartItems" style="margin:20px 0; max-height:50vh; overflow-y:auto;"></div>
+    <div style="border-top:2px dashed #ffd7a8; padding-top:15px; text-align:right; font-size:20px; color:#cc6699;">
+        <strong>Total: <span id="cartTotal">₹0</span></strong>
+    </div>
+</div>
+
+<!-- BILL Modal -->
+<div id="billModal">
+    <div class="bill-container">
+        <div class="bill-header">
+            <h2>BILL</h2>
+            <button class="close-bill" onclick="closeBill()">Close</button>
+        </div>
+        <table class="bill-table">
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="billItems"></tbody>
+        </table>
+        <div class="grand-total">
+            Grand Total: <span id="grandTotal">₹0</span>
+        </div>
+        <div class="bill-actions">
+            <button class="print-btn" onclick="window.print()">Print Bill</button>
+            <button class="continue-btn" onclick="closeBill()">Continue Shopping</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let cart = JSON.parse(localStorage.getItem('mommyGlowCart') || '[]');
+
+    function saveCart() {
+        localStorage.setItem('mommyGlowCart', JSON.stringify(cart));
+        updateAll();
+    }
+
+    function addToCart(btn, name, price) {
+        const item = cart.find(i => i.name === name);
+        if (item) item.qty += 1;
+        else cart.push({ name, price: Number(price), qty: 1 });
+        saveCart();
+
+        btn.classList.add('added');
+        btn.innerHTML = 'Added! Select one';
+        setTimeout(() => {
+            btn.classList.remove('added');
+            btn.innerHTML = 'Add to Glow Cart';
+        }, 2000);
+
+        sparkleBurst();
+    }
+
+    function sparkleBurst() {
+        for(let i = 0; i < 12; i++) {
+            setTimeout(() => {
+                const s = document.createElement('div');
+                s.innerHTML = 'Sparkles';
+                s.style.position = 'fixed';
+                s.style.left = Math.random() * window.innerWidth + 'px';
+                s.style.top = window.innerHeight + 'px';
+                s.style.fontSize = '32px';
+                s.style.pointerEvents = 'none';
+                s.style.animation = 'floatUp 2s ease-out forwards';
+                document.body.appendChild(s);
+                setTimeout(() => s.remove(), 2000);
+            }, i * 80);
+        }
+    }
+
+    function updateAll() {
+        const totalItems = cart.reduce((s,i) => s + i.qty, 0);
+        const totalPrice = cart.reduce((s,i) => s + i.price * i.qty, 0);
+
+        document.getElementById('cartBadge').textContent = totalItems;
+        document.getElementById('floatingCart').classList.toggle('show', totalItems > 0);
+
+        document.getElementById('cartItems').innerHTML = cart.length === 0
+            ? '<p style="text-align:center;color:#cc6699;">Your cart is empty</p>'
+            : cart.map(item => `
+                <div style="padding:12px 0;border-bottom:1px dashed #ffd7a8;display:flex;justify-content:space-between;">
+                    <div><strong>${item.name}</strong><br>₹${item.price} × ${item.qty}</div>
+                    <div style="color:#cc6699;">₹${item.price * item.qty}</div>
+                </div>
+            `).join('');
+
+        document.getElementById('cartTotal').textContent = '₹' + totalPrice;
+    }
+
+    document.getElementById('billBtn').onclick = () => {
+        if (cart.length === 0) return alert('Your cart is empty!');
+        let html = '', grand = 0;
+        cart.forEach(item => {
+            const total = item.price * item.qty;
+            grand += total;
+            html += `<tr>
+                <td style="text-align:left;padding-left:20px;">${item.name}</td>
+                <td>${item.qty}</td>
+                <td>₹${item.price}</td>
+                <td style="color:#cc6699;font-weight:bold;">₹${total}</td>
+            </tr>`;
+        });
+        document.getElementById('billItems').innerHTML = html;
+        document.getElementById('grandTotal').textContent = '₹' + grand;
+        document.getElementById('billModal').style.display = 'flex';
+    };
+
+    window.closeBill = () => document.getElementById('billModal').style.display = 'none';
+
+    document.getElementById('cartIcon').onclick = () => document.getElementById('floatingCart').classList.toggle('show');
+
+    document.querySelectorAll('.add-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            addToCart(this, this.dataset.name, this.dataset.price);
+        });
+    });
+
+    updateAll();
+</script>
+</body>
+</html>
